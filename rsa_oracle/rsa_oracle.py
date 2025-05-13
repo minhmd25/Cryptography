@@ -20,8 +20,9 @@ p.recvuntil(b"decrypt: ")
 p.sendline(str(c_a*c).encode())
 p.recvuntil(b"mod n): ")
 
-password = int(p.recvline(), 16) // 2
-length = (password.bit_length() + 7) // 8
+password = int(p.recvline(), 16) // 2 # đổi từ hex về int
+length = (password.bit_length() + 7) // 8 # ép thêm 7 bit để tính đc số byte đủ
 password = password.to_bytes(length, "big").decode("utf-8")
+# ép về dãy byte kiểu big_endian và giải thành txt utd-8
 
 print("Password:", password)
